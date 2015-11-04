@@ -24,7 +24,10 @@ end
 optparse.parse!
 
 def main(options)
-    puts options
+    puts options[:yaml_file]
+    yamlfile = YAML::load_file(options[:yaml_file])
+
+    puts yamlfile
 end
 
 main(options)
