@@ -1,14 +1,30 @@
-#!/usr/bin/env Ruby
+#!/usr/bin/env ruby
 
 require 'yaml'
 require 'optparse'
 
-def main
+options = {}
+
+optparse = OptionParser.new do |opts|
+    opts.banner = "Stuff"
+
+    opts.on("-f", "--file-type FILE_TYPE", "Type of object file to generate") do |fileType|
+        options[:file_type] = fileType
+    end
+
+    opts.on("-y", "--yaml YAML_FILE", "YAML file to parse") do |yamlFile|
+        options[:yaml_file] = yamlFile
+    end
+
+    opts.on("-s", "--scaffold", "Scaffold all supporting file types") do |scaffold|
+        options[:scaffold] = scaffold
+    end
 end
 
-options = {}
-OptionsParser.new do |opt|
-    opts.banner = "Usage: generate.rb <file_type (VB, C#)> <yaml_file> [options]"
-end.parse!
+optparse.parse!
 
-main()
+def main(options)
+    puts options
+end
+
+main(options)
