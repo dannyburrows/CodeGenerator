@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'optparse'
+Dir[File.dirname(__FILE__) + '/Classes/**/*.rb'].each {|file| require file }
 
 options = {}
 
@@ -24,10 +25,9 @@ end
 optparse.parse!
 
 def main(options)
-    puts options[:yaml_file]
     yamlfile = YAML::load_file(options[:yaml_file])
 
-    puts yamlfile
+    item = ApiController.new(yamlfile)
 end
 
 main(options)
