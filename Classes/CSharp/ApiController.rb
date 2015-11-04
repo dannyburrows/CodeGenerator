@@ -1,9 +1,8 @@
 # Builds a base api controller for the specific model
-class ApiController
+class ApiController < FileOutput
 	@namespace = nil
 	@modelName = nil
 	@baseApi = nil
-	@template = nil
 
 	def initialize(model, saveFile = nil)
 		@namespace = model['namespace']
@@ -17,7 +16,7 @@ class ApiController
 		if (saveFile)
 			saveMe()
 		else
-			puts @template
+			printMe()
 		end
 	end
 
@@ -31,9 +30,5 @@ class ApiController
 		@template = @template.gsub! "###namespace###", @namespace
 		@template = @template.gsub! "###model-name###", @modelName
 		@template = @template.gsub! "###baseApi###", (@baseApi.nil? ? "" : " : #{@baseApi}")
-	end
-
-	def saveMe()
-
 	end
 end
