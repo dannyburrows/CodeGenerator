@@ -8,6 +8,7 @@ class ApiController < FileOutput
 		@namespace = model['namespace']
 		@modelName = model['model-name']
 		@baseApi = model['api-controller']['baseApi']
+		@fileType = "cs"
 		saveFile ||= false
 
 		loadTemplate()
