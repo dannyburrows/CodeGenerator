@@ -23,7 +23,7 @@ class CSApiController < FileOutput
 
 	# Gets reference to the tempalte file
 	def loadTemplate
-		@template = File.read(__dir__ + "./ApiControllerBase.cs")
+		@template = File.read(__dir__ + "./ApiControllerTemplate.cs")
 	end
 
 	# Replaces specific variables in template file
