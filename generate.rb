@@ -78,7 +78,17 @@ def Main(options)
 end
 
 def CreateCSharp(yamlObject, options, saveFiles)
-    item = CSApiController.new(yamlObject, saveFiles)
+    if (!options[:api].nil? || !options[:scaffold].nil?)
+        CSApiController.new(yamlObject, saveFiles)
+    end
+
+    if (!options[:crud].nil? || !options[:scaffold].nil?)
+        CSBusinessLogicCRUD.new(yamlObject, saveFiles)
+    end
+
+    if (!options[:mvc].nil? || !options[:scaffold].nil?)
+        CSMvcController.new(yamlObject, saveFiles)
+    end
 end
 
 def CreateVB(yamlObject, options, saveFiles)
