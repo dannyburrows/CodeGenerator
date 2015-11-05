@@ -7,11 +7,11 @@ namespace: FEMACPT
 # build api
 api-controller:
     include: true
-    baseApi : 
+    baseApi : BaseApiController
 # build a mvc controller
 mvc-controller:
     include: true
-    base : null
+    base : 
 angular-contoller: true
 business-crud: true
 data-crud: false
