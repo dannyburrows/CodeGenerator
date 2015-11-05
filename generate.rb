@@ -34,6 +34,10 @@ optparse = OptionParser.new do |opts|
         options[:triggers] = yamlFile
     end
 
+    opts.on("-l", "--model", "Include and create the basic model") do |yamlFile|
+        options[:model] = yamlFile
+    end
+
     opts.on("-m", "--mvc", "Create the mvc controller") do |yamlFile|
         options[:mvc] = yamlFile
     end
@@ -88,6 +92,10 @@ def CreateCSharp(yamlObject, options, saveFiles)
 
     if (options.has_key?("mvc".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['mvc-controller']['include'])
         CSMvcController.new(yamlObject, saveFiles)
+    end
+
+    if (options.has_key?("model".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['model']['include'])
+        CSModel.new(yamlObject, saveFiles)
     end
 end
 

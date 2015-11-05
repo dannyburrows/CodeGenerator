@@ -1,13 +1,14 @@
-class CSBusinessLogicCRUD < FileOutput
+class CSModel < FileOutput
 	@namespace = nil
 	@modelName = nil
+	@properties = nil
 
 	def initialize(model, templateFile, saveFile = nil)
 		@namespace = model['namespace']
 		@modelName = model['model']['name']
 		@fileType = "cs"
 		saveFile ||= false
-		@templateFile = model['businescrud-template'] ? File.expand_path("./Templates/#{model['businescrud-template']}", Dir.pwd) : __dir__ + "/CSBusinessLogicCRUDTemplate.cs"
+		@templateFile = model['model']['template'] ? File.expand_path("./Templates/#{model['model']['template']}", Dir.pwd) : __dir__ + "/ModelTemplate.cs"
 
 		if !File.exist?(@templateFile)
 			puts "File #{@templateFile} does not exist"
@@ -15,6 +16,7 @@ class CSBusinessLogicCRUD < FileOutput
 		end
 
 		loadTemplate()
+		buildProperties(model)
 		replaceVariables()
 
 		saveFile ?  saveMe() : printMe()
@@ -29,6 +31,13 @@ class CSBusinessLogicCRUD < FileOutput
 	def replaceVariables
 		@template = @template.gsub! "###namespace###", @namespace
 		@template = @template.gsub! "###model-name###", @modelName
-		@template = @template.gsub! "###model-parameter###", @modelName
+		@template = @template.gsub! "###properties###", @properties
+	end
+
+	def buildProperties(model)
+		@properties = ""
+		model['properties'].each do |key, val|
+			@properties += "\t\tPublic #{key} #{val.capitalize} { get; set; } \r\n"
+		end
 	end
 end

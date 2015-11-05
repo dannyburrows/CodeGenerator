@@ -6,7 +6,7 @@ class CSApiController < FileOutput
 
 	def initialize(model, saveFile = nil)
 		@namespace = model['namespace']
-		@modelName = model['model-name']
+		@modelName = model['model']['name']
 		@baseApi = model['api-controller']['baseApi']
 		
 		@fileType = model['file-type']
