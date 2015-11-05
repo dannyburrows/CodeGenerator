@@ -14,7 +14,7 @@ optparse = OptionParser.new do |opts|
         options[:api] = yamlFile
     end
 
-    opts.on("-c", "--crud", "Create the businessLogic CRUD") do |yamlFile|
+    opts.on("-c", "--crud [CRUDTEMPLATE]", "Create the businessLogic CRUD") do |yamlFile|
         options[:crud] = yamlFile
     end
 
@@ -78,15 +78,15 @@ def Main(options)
 end
 
 def CreateCSharp(yamlObject, options, saveFiles)
-    if (!options[:api].nil? || !options[:scaffold].nil?)
+    if (options.has_key?("api".to_sym) || options.has_key?("scaffold".to_sym))
         CSApiController.new(yamlObject, saveFiles)
     end
 
-    if (!options[:crud].nil? || !options[:scaffold].nil?)
-        CSBusinessLogicCRUD.new(yamlObject, saveFiles)
+    if (options.has_key?("crud".to_sym) || options.has_key?("scaffold".to_sym))
+        CSBusinessLogicCRUD.new(yamlObject, options[:crud], saveFiles)
     end
 
-    if (!options[:mvc].nil? || !options[:scaffold].nil?)
+    if (options.has_key?("mvc".to_sym) || options.has_key?("scaffold".to_sym))
         CSMvcController.new(yamlObject, saveFiles)
     end
 end

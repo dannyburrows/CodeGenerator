@@ -10,7 +10,7 @@ namespace ###namespace###
     {
         #region "Create"
 
-        public async Task<###model-name###> Insert(###model-name### ###model-name###)
+        public async Task<###model-name###> Insert(###model-name### ###model-parameter###)
         {
             Throw new NotImplementedException();
         } // Insert
@@ -26,7 +26,7 @@ namespace ###namespace###
 
         #region "Update"
 
-        public async Task<List<string>> Update(###model-name### ###model-name###)
+        public async Task<List<string>> Update(###model-name### ###model-parameter###)
         {
             Throw new NotImplementedException();
         } // Update
