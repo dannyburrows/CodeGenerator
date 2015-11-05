@@ -1,0 +1,35 @@
+model:
+    name: ModelTemplate
+    include: true
+    template:
+file-type: cs
+namespace: FEMACPT
+# build api
+api-controller:
+    include: true
+    baseApi : 
+# build a mvc controller
+mvc-controller:
+    include: true
+    base : null
+angular-contoller: true
+business-crud: true
+data-crud: false
+
+# templates blank templates will use a basic one
+angular-template:
+api-template: 
+mvc-template:
+businesscrud-template: FEMACPTCrudTemplate.cs
+
+### SQL Stuff
+# build sql triggers on tabl
+triggers: false
+# build audit tables
+audit-tables: false
+
+primary-key: id
+# list of properties that will be added to sql script and to class
+properties:
+    int : id
+    string : name
