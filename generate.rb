@@ -10,11 +10,11 @@ options = {}
 optparse = OptionParser.new do |opts|
     opts.banner = "Stuff"
 
-    opts.on("-a", "--api [APITEMPLATE]", "Create the api controller") do |yamlFile|
+    opts.on("-a", "--api", "Create the api controller") do |yamlFile|
         options[:api] = yamlFile
     end
 
-    opts.on("-c", "--crud [CRUDTEMPLATE]", "Create the businessLogic CRUD") do |yamlFile|
+    opts.on("-c", "--crud", "Create the businessLogic CRUD") do |yamlFile|
         options[:crud] = yamlFile
     end
 
@@ -68,7 +68,7 @@ optparse.parse!
 
 def Main(options)
     yamlObject = YAML::load_file(options[:yaml_file])
-    fileType = options[:file_type]
+    fileType = yamlObject['file-type'] || options[:file_type]
     saveFiles = options[:echo].nil?
     if (["cs", "csharp", "c\#"].include?(fileType.downcase))
         CreateCSharp(yamlObject, options, saveFiles)
@@ -78,15 +78,15 @@ def Main(options)
 end
 
 def CreateCSharp(yamlObject, options, saveFiles)
-    if (options.has_key?("api".to_sym) || options.has_key?("scaffold".to_sym))
-        CSApiController.new(yamlObject, options[:api], saveFiles)
+    if (options.has_key?("crud".to_sym) || options.has_key?("scaffold".to_sym) || !yamlObject['business-crud'])
+        CSBusinessLogicCRUD.new(yamlObject, saveFiles)
     end
 
-    if (options.has_key?("crud".to_sym) || options.has_key?("scaffold".to_sym))
-        CSBusinessLogicCRUD.new(yamlObject, options[:crud], saveFiles)
+    if (options.has_key?("api".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['api-controller']['include'])
+        CSApiController.new(yamlObject, saveFiles)
     end
 
-    if (options.has_key?("mvc".to_sym) || options.has_key?("scaffold".to_sym))
+    if (options.has_key?("mvc".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['mvc-controller']['include'])
         CSMvcController.new(yamlObject, saveFiles)
     end
 end

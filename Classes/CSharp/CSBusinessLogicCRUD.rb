@@ -7,7 +7,8 @@ class CSBusinessLogicCRUD < FileOutput
 		@modelName = model['model-name']
 		@fileType = "cs"
 		saveFile ||= false
-		@templateFile = templateFile || __dir__ + "/CSBusinessLogicCRUDTemplate.cs"
+		@templateFile = model['businescrud-template'] ? File.expand_path("./Templates/#{model['businescrud-template']}", Dir.pwd) : __dir__ + "/CSBusinessLogicCRUDTemplate.cs"
+
 		if !File.exist?(@templateFile)
 			puts "File #{@templateFile} does not exist"
 			exit
