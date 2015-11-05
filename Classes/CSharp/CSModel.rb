@@ -3,7 +3,7 @@ class CSModel < FileOutput
 	@modelName = nil
 	@properties = nil
 
-	def initialize(model, templateFile, saveFile = nil)
+	def initialize(model, saveFile = nil)
 		@namespace = model['namespace']
 		@modelName = model['model']['name']
 		@fileType = "cs"
