@@ -2,12 +2,12 @@ class CSBusinessLogicCRUD < FileOutput
 	@namespace = nil
 	@modelName = nil
 
-	def initialize(model, templateFile, saveFile = nil)
+	def initialize(model, saveFile = nil)
 		@namespace = model['namespace']
 		@modelName = model['model']['name']
 		@fileType = "cs"
 		saveFile ||= false
-		@templateFile = model['businescrud-template'] ? File.expand_path("./Templates/#{model['businescrud-template']}", Dir.pwd) : __dir__ + "/CSBusinessLogicCRUDTemplate.cs"
+		@templateFile = model['businesscrud-template'] ? File.expand_path("./Templates/#{model['businesscrud-template']}", Dir.pwd) : __dir__ + "/CSBusinessLogicCRUDTemplate.cs"
 
 		if !File.exist?(@templateFile)
 			puts "File #{@templateFile} does not exist"

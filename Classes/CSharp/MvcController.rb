@@ -3,6 +3,6 @@ class CSMvcController < FileOutput
 	@modelName = nil
 
 	def initialize(model, templateFile, saveFile = nil)
-		puts "Ok"
+		
 	end
 end

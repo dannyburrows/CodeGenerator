@@ -42,6 +42,10 @@ optparse = OptionParser.new do |opts|
         options[:mvc] = yamlFile
     end
 
+    opts.on("-n", "--ng", "Create the angular controller") do |yamlFile|
+        options[:ng] = yamlFile
+    end
+
     opts.on("-p", "--stored-procedure", "Include all basic stored procedures") do |yamlFile|
         options[:stored_procedure] = yamlFile
     end
@@ -77,24 +81,26 @@ def Main(options)
     if (["cs", "csharp", "c\#"].include?(fileType.downcase))
         CreateCSharp(yamlObject, options, saveFiles)
     elsif (["vb", "vb.net", "visual basic"].include?(fileType.downcase))
-        CreateVB(yamlObject, option, saveFiles)
+        CreateVB(yamlObject, options, saveFiles)
     end
+
+    CreateAngular(yamlObject, options, saveFiles)
 end
 
 def CreateCSharp(yamlObject, options, saveFiles)
-    if (options.has_key?("crud".to_sym) || options.has_key?("scaffold".to_sym) || !yamlObject['business-crud'])
+    if ((options.has_key?("crud".to_sym) && !yamlObject['business-crud']) || options.has_key?("scaffold".to_sym))
         CSBusinessLogicCRUD.new(yamlObject, saveFiles)
     end
 
-    if (options.has_key?("api".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['api-controller']['include'])
+    if ((options.has_key?("api".to_sym) && yamlObject['api-controller']['include']) || options.has_key?("scaffold".to_sym))
         CSApiController.new(yamlObject, saveFiles)
     end
 
-    if (options.has_key?("mvc".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['mvc-controller']['include'])
+    if ((options.has_key?("mvc".to_sym) && yamlObject['mvc-controller']['include']) || options.has_key?("scaffold".to_sym))
         CSMvcController.new(yamlObject, saveFiles)
     end
 
-    if (options.has_key?("model".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['model']['include'])
+    if ((options.has_key?("model".to_sym) && yamlObject['model']['include']) || options.has_key?("scaffold".to_sym))
         CSModel.new(yamlObject, saveFiles)
     end
 end
@@ -102,7 +108,10 @@ end
 def CreateVB(yamlObject, options, saveFiles)
 end
 
-def CreateAngular()
+def CreateAngular(yamlObject, options, saveFiles)
+    if (options.has_key?("ng".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['angular-controller'])
+        AngularController.new(yamlObject, saveFiles)
+    end
 end
 
 Main(options)

@@ -6,6 +6,7 @@ class FileOutput
 	@fileType = nil
 	@templateFile = nil
 
+	# writes the template to a file
 	def saveMe()
 		modelName = self.class.name
 		objectsPath = File.expand_path("./Objects", Dir.pwd)
@@ -23,6 +24,7 @@ class FileOutput
 		File.open("#{modelDirectory}/#{modelName}.#{@fileType}", 'w') { |file| file.write(@template)}
 	end
 
+	# prints the output to the console instead of saving to a file
 	def printMe()
 		puts @template
 	end

@@ -12,7 +12,7 @@ class CSApiController < FileOutput
 		@fileType = model['file-type']
 		saveFile ||= false
 		@templateFile = model['api-template'] ? File.expand_path("./Templates/#{model['api-template']}", Dir.pwd) : __dir__ + "/ApiControllerTemplate.cs"
-		puts @templateFile
+
 		if !File.exist?(@templateFile)
 			puts "File #{@templateFile} does not exist"
 			exit

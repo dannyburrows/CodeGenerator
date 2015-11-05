@@ -12,7 +12,7 @@ api-controller:
 mvc-controller:
     include: true
     base : 
-angular-contoller: true
+angular-controller: true
 business-crud: true
 data-crud: false
 
