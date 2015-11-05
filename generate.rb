@@ -39,7 +39,7 @@ optparse = OptionParser.new do |opts|
     end
 
     opts.on("-p", "--stored-procedure", "Include all basic stored procedures") do |yamlFile|
-        options[:stored-procedure] = yamlFile
+        options[:stored_procedure] = yamlFile
     end
 
     opts.on("-s", "--scaffold", "Scaffold all supporting file types") do |scaffold|
@@ -69,18 +69,19 @@ optparse.parse!
 def Main(options)
     yamlObject = YAML::load_file(options[:yaml_file])
     fileType = options[:file_type]
+    saveFiles = options[:echo].nil?
     if (["cs", "csharp", "c\#"].include?(fileType.downcase))
-        CreateCSharp(yamlObject, options)
+        CreateCSharp(yamlObject, options, saveFiles)
     elsif (["vb", "vb.net", "visual basic"].include?(fileType.downcase))
-        CreateVB(yamlObject, option)
+        CreateVB(yamlObject, option, saveFiles)
     end
 end
 
-def CreateCSharp(yamlObject, options)
-    item = CSApiController.new(yamlObject, true)
+def CreateCSharp(yamlObject, options, saveFiles)
+    item = CSApiController.new(yamlObject, saveFiles)
 end
 
-def CreateVB(yamlObject, options)
+def CreateVB(yamlObject, options, saveFiles)
 end
 
 def CreateAngular()
