@@ -4,6 +4,7 @@ require 'fileutils'
 class FileOutput
 	@template = nil
 	@fileType = nil
+	@templateFile = nil
 
 	def saveMe()
 		modelName = self.class.name
@@ -19,7 +20,7 @@ class FileOutput
 			FileUtils.mkpath(modelDirectory)
 		end
 		# write self.class.name as filename.#{@fileType}
-		File.open("#{modelDirectory}/#{@modelName}.#{@fileType}", 'w') { |file| file.write(@template)}
+		File.open("#{modelDirectory}/#{modelName}.#{@fileType}", 'w') { |file| file.write(@template)}
 	end
 
 	def printMe()

@@ -4,21 +4,22 @@ class CSApiController < FileOutput
 	@modelName = nil
 	@baseApi = nil
 
-	def initialize(model, saveFile = nil)
+	def initialize(model, templateFile, saveFile = nil)
 		@namespace = model['namespace']
 		@modelName = model['model-name']
 		@baseApi = model['api-controller']['baseApi']
 		@fileType = "cs"
 		saveFile ||= false
+		@templateFile = templateFile || __dir__ + "/CSBusinessLogicCRUDTemplate.cs"
+		if !File.exist?(@templateFile)
+			puts "File #{@templateFile} does not exist"
+			exit
+		end
 
 		loadTemplate()
 		replaceVariables()
 
-		if (saveFile)
-			saveMe()
-		else
-			printMe()
-		end
+		saveFile ?  saveMe() : printMe()
 	end
 
 	# Gets reference to the tempalte file

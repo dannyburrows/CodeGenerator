@@ -1,7 +1,6 @@
 class CSBusinessLogicCRUD < FileOutput
 	@namespace = nil
 	@modelName = nil
-	@templateFile = nil
 
 	def initialize(model, templateFile, saveFile = nil)
 		@namespace = model['namespace']
@@ -17,11 +16,7 @@ class CSBusinessLogicCRUD < FileOutput
 		loadTemplate()
 		replaceVariables()
 
-		if (saveFile)
-			saveMe()
-		else
-			printMe()
-		end
+		saveFile ?  saveMe() : printMe()
 	end
 
 	# Gets reference to the template file

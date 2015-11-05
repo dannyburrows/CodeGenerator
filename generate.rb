@@ -10,7 +10,7 @@ options = {}
 optparse = OptionParser.new do |opts|
     opts.banner = "Stuff"
 
-    opts.on("-a", "--api", "Create the api controller") do |yamlFile|
+    opts.on("-a", "--api [APITEMPLATE]", "Create the api controller") do |yamlFile|
         options[:api] = yamlFile
     end
 
@@ -79,7 +79,7 @@ end
 
 def CreateCSharp(yamlObject, options, saveFiles)
     if (options.has_key?("api".to_sym) || options.has_key?("scaffold".to_sym))
-        CSApiController.new(yamlObject, saveFiles)
+        CSApiController.new(yamlObject, options[:api], saveFiles)
     end
 
     if (options.has_key?("crud".to_sym) || options.has_key?("scaffold".to_sym))
