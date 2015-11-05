@@ -1,5 +1,5 @@
 # Builds a base api controller for the specific model
-class ApiController < FileOutput
+class CSApiController < FileOutput
 	@namespace = nil
 	@modelName = nil
 	@baseApi = nil
