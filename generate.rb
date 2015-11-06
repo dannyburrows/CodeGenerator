@@ -8,13 +8,13 @@ Dir[File.dirname(__FILE__) + '/Classes/**/*.rb'].each {|file| require file }
 options = {}
 
 optparse = OptionParser.new do |opts|
-    opts.banner = "Stuff"
+    opts.banner = "Usage: generate.rb -f (CS,VB) -y <modelFile> [FLAGS]"
 
-    opts.on("-a", "--api", "Create the api controller") do |yamlFile|
+    opts.on("-a", "--api", "Include the api controller") do |yamlFile|
         options[:api] = yamlFile
     end
 
-    opts.on("-c", "--crud", "Create the businessLogic CRUD") do |yamlFile|
+    opts.on("-c", "--crud", "Include the businessLogic CRUD") do |yamlFile|
         options[:crud] = yamlFile
     end
 
@@ -70,6 +70,10 @@ optparse = OptionParser.new do |opts|
         options[:yaml_file] = yamlFile
     end
 
+    opts.on( '-h', '--help', 'Display this screen' ) do
+        puts opts
+        exit
+    end
 end
 
 optparse.parse!
