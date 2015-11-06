@@ -92,7 +92,7 @@ def Main(options)
 end
 
 def CreateCSharp(yamlObject, options, saveFiles)
-    if ((options.has_key?("crud".to_sym) && !yamlObject['business-crud']) || options.has_key?("scaffold".to_sym))
+    if ((options.has_key?("crud".to_sym) && yamlObject['business-crud']) || options.has_key?("scaffold".to_sym))
         CSBusinessLogicCRUD.new(yamlObject, saveFiles)
     end
 
