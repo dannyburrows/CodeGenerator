@@ -113,7 +113,7 @@ def CreateVB(yamlObject, options, saveFiles)
 end
 
 def CreateAngular(yamlObject, options, saveFiles)
-    if (options.has_key?("ng".to_sym) || options.has_key?("scaffold".to_sym) || yamlObject['angular-controller'])
+    if ((options.has_key?("ng".to_sym) && yamlObject['angular-controller']) || options.has_key?("scaffold".to_sym) )
         AngularController.new(yamlObject, saveFiles)
     end
 end

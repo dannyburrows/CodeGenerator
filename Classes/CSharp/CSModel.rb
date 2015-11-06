@@ -34,10 +34,17 @@ class CSModel < FileOutput
 		@template = @template.gsub! "###properties###", @properties
 	end
 
+	# Parses 
 	def buildProperties(model)
 		@properties = ""
 		model['properties'].each do |key, val|
-			@properties += "\t\tPublic #{key} #{val.capitalize} { get; set; } \r\n"
+			if (val.kind_of?(Array))
+				val.each do |innerVal|
+					@properties += "\tPublic #{key} #{innerVal} { get; set; } \r\n"
+				end
+			else
+				@properties += "\tPublic #{key} #{val} { get; set; } \r\n"
+			end
 		end
 	end
 end
