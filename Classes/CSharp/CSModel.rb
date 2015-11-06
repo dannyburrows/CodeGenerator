@@ -40,10 +40,10 @@ class CSModel < FileOutput
 		model['properties'].each do |key, val|
 			if (val.kind_of?(Array))
 				val.each do |innerVal|
-					@properties += "\tPublic #{key} #{innerVal} { get; set; } \r\n"
+					@properties += "\tpublic #{key} #{innerVal} { get; set; } \r\n"
 				end
 			else
-				@properties += "\tPublic #{key} #{val} { get; set; } \r\n"
+				@properties += "\tpublic #{key} #{val} { get; set; } \r\n"
 			end
 		end
 	end

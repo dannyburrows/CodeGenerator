@@ -15,8 +15,7 @@ namespace ###namespace###
         [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
-            Throw New NotImplementedException();
-            Return Ok();
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -26,7 +25,7 @@ namespace ###namespace###
         [HttpPost]
         public async Task<IHttpActionResult> Post(###model-name### modelName)
         {
-            Throw New NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -36,7 +35,7 @@ namespace ###namespace###
         [HttpPut]
         public async Task<IHttpActionResult> Update(###model-name### modelName)
         {
-            Throw New NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -46,7 +45,7 @@ namespace ###namespace###
         [HttpDelete]
         public async Task<IHttpActionResult> Delete(int ID)
         {
-            Throw New NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion
